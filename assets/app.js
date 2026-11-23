@@ -65,8 +65,9 @@
     });
   });
 
-  if (location.hash === '#won') activate('won', { scroll: false });
-  else activate('setup', { scroll: false });
+  /* 첫 화면은 '2027 머니 트렌드 · 책 추천'. #setup 로 들어오면 세팅법 탭을 연다. */
+  if (location.hash === '#setup') activate('setup', { scroll: false });
+  else activate('won', { scroll: false });
 
   /* reading progress */
   var bar = document.getElementById('progressBar');
