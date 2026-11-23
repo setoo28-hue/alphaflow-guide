@@ -8,6 +8,26 @@
   };
   var head = document.querySelector('.head');
 
+  /* 12/1 00:00 KST 유료 전환 — 1~2장만 무료, 3장부터 잠금
+     ?lock=1 은 12월 화면 미리보기용(잠금만 걸고 풀지는 않는다) */
+  var LOCK_AT = Date.UTC(2026, 11, 1, 0, 0, 0) - 9 * 3600 * 1000;
+  var locked = /[?&]lock=1(?:&|$)/.test(location.search) || Date.now() >= LOCK_AT;
+  var lockedBody = document.getElementById('lockedBody');
+  var lockCard = document.getElementById('lockCard');
+
+  document.documentElement.classList.toggle('is-locked', locked);
+
+  if (locked && lockedBody) {
+    lockedBody.setAttribute('aria-hidden', 'true');
+    Array.prototype.forEach.call(document.querySelectorAll('#guide-setup .tnav a'), function (a) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el && lockedBody.contains(el)) {
+        a.classList.add('is-pay');
+        a.setAttribute('title', '12월 1일부터 유료');
+      }
+    });
+  }
+
   function headHeight() {
     return head ? Math.round(head.getBoundingClientRect().height) : 0;
   }
@@ -74,6 +94,8 @@
     var target = document.getElementById(id);
     if (!target) return;
     e.preventDefault();
+    /* 잠금 상태에서 3~9장 목차를 누르면 잠금 카드로 */
+    if (locked && lockedBody && lockCard && lockedBody.contains(target)) target = lockCard;
     var top = target.getBoundingClientRect().top + window.pageYOffset - headHeight() - 10;
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   });
