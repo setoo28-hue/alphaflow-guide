@@ -389,3 +389,11 @@ html.is-locked .tnav a.is-pay{opacity:.45}
 .final-note p{margin-top:9px;font-size:12.5px;color:rgba(255,255,255,.68);line-height:1.74}
 .final-note p.final-note-t{margin-top:0;font-size:10.5px;font-weight:650;letter-spacing:.13em;color:#6FE3B0}
 .final-note p.final-note-b{color:#fff;font-weight:600}
+
+/* 좁은 화면: 가격 타임라인 3칸을 한 줄로 */
+@media (max-width:430px){
+  .price-note{gap:6px}
+  .price-note .ar{display:none}
+  .price-note > div:not(.ar){flex:1 1 0;min-width:0;padding:9px 6px}
+  .price-note b{font-size:13.5px}
+}
