@@ -341,3 +341,7 @@ main{max-width:680px;margin:0 auto;padding:0 20px}
   html{scroll-behavior:auto}
   *{transition:none!important}
 }
+
+/* tertiary link under CTA buttons */
+.tert{display:inline-block;margin-top:14px;font-size:12px;font-weight:600;color:var(--ink2);border-bottom:1px solid #D8D4CA;padding-bottom:2px;letter-spacing:-.005em}
+.tert:active{color:var(--accent);border-color:var(--accent)}
